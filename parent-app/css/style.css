@@ -20,7 +20,7 @@ input, select { font-family: inherit; }
 .hidden { display: none !important; }
 
 /* ---------- Auth / onboarding screens ---------- */
-.auth-shell { min-height: 100vh; min-height: 100dvh; display: flex; align-items: flex-start; justify-content: center; padding: 24px; padding-top: calc(48px + env(safe-area-inset-top)); padding-bottom: calc(48px + env(safe-area-inset-bottom)); background: linear-gradient(135deg, var(--navy), #2C3958); overflow-y: auto; -webkit-overflow-scrolling: touch; }
+.auth-shell { height: 100vh; height: 100dvh; box-sizing: border-box; display: flex; align-items: flex-start; justify-content: center; padding: 24px; padding-top: calc(48px + env(safe-area-inset-top)); padding-bottom: calc(48px + env(safe-area-inset-bottom)); background: linear-gradient(135deg, var(--navy), #2C3958); overflow-y: auto; -webkit-overflow-scrolling: touch; }
 .auth-card { background: var(--surface); border-radius: var(--radius-lg); padding: 36px; max-width: 440px; width: 100%; box-shadow: 0 30px 70px rgba(0,0,0,0.35); }
 .auth-card .mark { width: 56px; height: 56px; border-radius: 16px; background: var(--marigold); display: flex; align-items: center; justify-content: center; font-size: 28px; margin-bottom: 16px; }
 .auth-card h1 { font-size: 22px; font-weight: 800; margin-bottom: 6px; }
@@ -102,7 +102,7 @@ input, select { font-family: inherit; }
 
   .bottom-nav {
     display: flex; position: fixed; left: 12px; right: 12px;
-    bottom: calc(14px + env(safe-area-inset-bottom));
+    bottom: calc(6px + env(safe-area-inset-bottom));
     padding: 6px; gap: 2px; z-index: 40; border-radius: 26px;
     background: rgba(31, 42, 68, 0.82);
     -webkit-backdrop-filter: blur(22px) saturate(1.5);
@@ -138,7 +138,12 @@ input, select { font-family: inherit; }
 
 /* ---------- Task / list rows ---------- */
 .row-list { display: flex; flex-direction: column; gap: 10px; }
-.item-row { display: flex; align-items: center; gap: 12px; background: var(--surface); border-radius: var(--radius-md); padding: 13px 16px; box-shadow: var(--shadow); }
+.item-row { display: flex; align-items: center; gap: 12px; background: var(--surface); border-radius: var(--radius-md); padding: 13px 16px; box-shadow: var(--shadow); transition: transform 0.2s ease; }
+.icon-badge { width: 38px; height: 38px; border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 18px; flex-shrink: 0; }
+.mini-bar-track { height: 6px; background: var(--bg-soft); border-radius: var(--radius-pill); overflow: hidden; margin-top: 8px; }
+.mini-bar-fill { height: 100%; border-radius: var(--radius-pill); transition: width 0.4s ease; }
+.kid-home-card { align-items: flex-start; }
+.kid-home-card .avatar { margin-top: 2px; }
 .item-row .info { flex: 1; min-width: 0; }
 .item-row .title { font-weight: 700; font-size: 14px; }
 .item-row .meta { font-size: 12px; color: var(--ink-faint); margin-top: 2px; }
