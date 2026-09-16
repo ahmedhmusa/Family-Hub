@@ -232,9 +232,14 @@
     const kidCards = kids.map((k) => {
       const list = state.tasks.filter((t) => t.owner_id === k.id && t.date === today);
       const pct = list.length ? Math.round((list.filter(isTaskSatisfied).length / list.length) * 100) : 0;
-      return `<div class="card profile-card">
+      const barColor = pct >= 80 ? "var(--sage)" : pct >= 40 ? "var(--marigold)" : "var(--berry)";
+      return `<div class="card profile-card kid-home-card">
         <span class="avatar" style="background:${k.color}">${k.emoji}</span>
-        <div><div class="name">${escapeHtml(k.name)}</div><div class="role">${pct}% done today · ${k.points} pts</div></div>
+        <div style="flex:1;min-width:0;">
+          <div class="name">${escapeHtml(k.name)}</div>
+          <div class="role">${pct}% done today · ${k.points} pts</div>
+          <div class="mini-bar-track"><div class="mini-bar-fill" style="width:${pct}%;background:${barColor};"></div></div>
+        </div>
       </div>`;
     }).join("");
 
@@ -255,15 +260,17 @@
 
   function taskRowHtml(t, showApprove) {
     const meta = CATEGORY_META[t.category];
-    return `<div class="item-row">
-      <div class="info"><div class="title">${t.icon || ""} ${escapeHtml(t.name)} <span class="cat-dot" style="background:${meta.color}"></span></div>
+    return `<div class="item-row" style="border-left:4px solid ${meta.color};">
+      <span class="icon-badge" style="background:${meta.color}22;color:${meta.color};">${t.icon || "⭐"}</span>
+      <div class="info"><div class="title">${escapeHtml(t.name)}</div>
       <div class="meta">${escapeHtml(profileById(t.owner_id)?.name || "")} · ${meta.label} · +${t.points} pts</div></div>
       ${showApprove ? `<button class="btn btn-sm btn-secondary" data-approve-task="${t.id}">Approve</button><button class="btn btn-sm btn-danger" data-reject-task="${t.id}">Reject</button>` : ""}
     </div>`;
   }
   function redemptionRowHtml(r) {
-    return `<div class="item-row">
-      <div class="info"><div class="title">${r.icon} ${escapeHtml(r.reward_title)}</div><div class="meta">${escapeHtml(profileById(r.owner_id)?.name || "")} · ${r.cost} pts</div></div>
+    return `<div class="item-row" style="border-left:4px solid var(--marigold);">
+      <span class="icon-badge" style="background:var(--marigold-tint);color:var(--marigold-dark);">${r.icon}</span>
+      <div class="info"><div class="title">${escapeHtml(r.reward_title)}</div><div class="meta">${escapeHtml(profileById(r.owner_id)?.name || "")} · ${r.cost} pts</div></div>
       <button class="btn btn-sm btn-secondary" data-approve-reward="${r.id}">Approve</button><button class="btn btn-sm btn-danger" data-deny-reward="${r.id}">Deny</button>
     </div>`;
   }
