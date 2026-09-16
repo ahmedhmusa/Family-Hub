@@ -195,33 +195,64 @@ create policy "read own family" on families for select using (id = current_famil
 create policy "parent update family" on families for update using (is_parent() and id = current_family_id());
 
 create policy "read family profiles" on profiles for select using (family_id = current_family_id());
-create policy "parent manage profiles" on profiles for all using (is_parent() and family_id = current_family_id());
+create policy "parent insert profiles" on profiles for insert with check (is_parent() and family_id = current_family_id());
+create policy "parent update profiles" on profiles for update using (is_parent() and family_id = current_family_id());
+create policy "parent delete profiles" on profiles for delete using (is_parent() and family_id = current_family_id());
 -- A child may only ever insert/see their own row via the signup flow;
 -- profile creation itself happens through the setup RPC below.
 
 create policy "read family catalog" on task_catalog for select using (family_id = current_family_id());
-create policy "parent manage catalog" on task_catalog for all using (is_parent() and family_id = current_family_id());
+create policy "parent write catalog" on task_catalog for insert with check (is_parent() and family_id = current_family_id());
+create policy "parent update catalog" on task_catalog for update using (is_parent() and family_id = current_family_id());
+create policy "parent delete catalog" on task_catalog for delete using (is_parent() and family_id = current_family_id());
 
 create policy "read family tasks" on tasks for select using (family_id = current_family_id());
-create policy "parent manage tasks" on tasks for all using (is_parent() and family_id = current_family_id());
+create policy "parent write tasks" on tasks for insert with check (is_parent() and family_id = current_family_id());
+create policy "parent update tasks" on tasks for update using (is_parent() and family_id = current_family_id());
+create policy "parent delete tasks" on tasks for delete using (is_parent() and family_id = current_family_id());
 
 create policy "read family rewards" on rewards for select using (family_id = current_family_id());
-create policy "parent manage rewards" on rewards for all using (is_parent() and family_id = current_family_id());
+create policy "parent write rewards" on rewards for insert with check (is_parent() and family_id = current_family_id());
+create policy "parent update rewards" on rewards for update using (is_parent() and family_id = current_family_id());
+create policy "parent delete rewards" on rewards for delete using (is_parent() and family_id = current_family_id());
 
 create policy "read family redemptions" on redemptions for select using (family_id = current_family_id());
-create policy "parent manage redemptions" on redemptions for all using (is_parent() and family_id = current_family_id());
+create policy "parent write redemptions" on redemptions for insert with check (is_parent() and family_id = current_family_id());
+create policy "parent update redemptions" on redemptions for update using (is_parent() and family_id = current_family_id());
+create policy "parent delete redemptions" on redemptions for delete using (is_parent() and family_id = current_family_id());
 
 create policy "read family quran goals" on quran_goals for select using (family_id = current_family_id());
-create policy "parent manage quran goals" on quran_goals for all using (is_parent() and family_id = current_family_id());
+create policy "parent write quran goals" on quran_goals for insert with check (is_parent() and family_id = current_family_id());
+create policy "parent update quran goals" on quran_goals for update using (is_parent() and family_id = current_family_id());
+create policy "parent delete quran goals" on quran_goals for delete using (is_parent() and family_id = current_family_id());
 
 create policy "read family school events" on school_events for select using (family_id = current_family_id());
-create policy "parent manage school events" on school_events for all using (is_parent() and family_id = current_family_id());
+create policy "parent write school events" on school_events for insert with check (is_parent() and family_id = current_family_id());
+create policy "parent update school events" on school_events for update using (is_parent() and family_id = current_family_id());
+create policy "parent delete school events" on school_events for delete using (is_parent() and family_id = current_family_id());
 
 create policy "read family homework" on homework for select using (family_id = current_family_id());
-create policy "parent manage homework" on homework for all using (is_parent() and family_id = current_family_id());
+create policy "parent write homework" on homework for insert with check (is_parent() and family_id = current_family_id());
+create policy "parent update homework" on homework for update using (is_parent() and family_id = current_family_id());
+create policy "parent delete homework" on homework for delete using (is_parent() and family_id = current_family_id());
 
 create policy "read family calendar" on calendar_events for select using (family_id = current_family_id());
-create policy "parent manage calendar" on calendar_events for all using (is_parent() and family_id = current_family_id());
+create policy "parent write calendar" on calendar_events for insert with check (is_parent() and family_id = current_family_id());
+create policy "parent update calendar" on calendar_events for update using (is_parent() and family_id = current_family_id());
+create policy "parent delete calendar" on calendar_events for delete using (is_parent() and family_id = current_family_id());
+
+-- Indexes on the remaining foreign keys the app filters/joins on
+-- (id_profiles_family, idx_tasks_family_date, idx_tasks_owner_date and
+-- idx_redemptions_family are declared earlier, alongside their tables).
+create index if not exists idx_calendar_events_family on calendar_events(family_id);
+create index if not exists idx_homework_family on homework(family_id);
+create index if not exists idx_homework_owner on homework(owner_id);
+create index if not exists idx_quran_goals_family on quran_goals(family_id);
+create index if not exists idx_redemptions_owner on redemptions(owner_id);
+create index if not exists idx_redemptions_reward on redemptions(reward_id);
+create index if not exists idx_rewards_family on rewards(family_id);
+create index if not exists idx_school_events_family on school_events(family_id);
+create index if not exists idx_school_events_owner on school_events(owner_id);
 
 -- ---------------------------------------------------------------------
 -- RPC FUNCTIONS — the ONLY way a child account can change data.
