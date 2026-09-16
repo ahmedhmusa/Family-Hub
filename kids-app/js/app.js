@@ -111,10 +111,6 @@
     document.getElementById("avatar-picker").innerHTML = device.map((c, i) => `
       <button class="avatar-tile" data-pick="${i}"><span class="big-emoji">${c.emoji}</span><span class="tile-name">${escapeHtml(c.name)}</span></button>`).join("");
     document.querySelectorAll("[data-pick]").forEach((b) => b.addEventListener("click", () => openPinScreen(device[parseInt(b.dataset.pick, 10)])));
-    document.getElementById("open-setup-link").addEventListener("click", () => {
-      document.getElementById("picker-screen").classList.add("hidden");
-      showSetupScreen(getSupabaseConfig(), getDeviceConfig());
-    });
   }
 
   function openPinScreen(child) {
@@ -449,6 +445,26 @@
     if (data.status === "fulfilled") burst();
     await refreshAndRerender();
   }
+
+  // Device setup is intentionally not a visible link on the picker screen —
+  // a child shouldn't be able to tap into it by accident. A parent can still
+  // reach it with a 1.5s long-press on the star. Bound once here (not inside
+  // showPickerScreen, which can run many times per session) so it never
+  // accumulates duplicate listeners.
+  function bindHiddenSetupGesture() {
+    const mascot = document.getElementById("picker-mascot");
+    if (!mascot) return;
+    let pressTimer = null;
+    const start = () => { pressTimer = setTimeout(() => {
+      document.getElementById("picker-screen").classList.add("hidden");
+      showSetupScreen(getSupabaseConfig(), getDeviceConfig());
+    }, 1500); };
+    const cancel = () => { clearTimeout(pressTimer); };
+    mascot.addEventListener("mousedown", start);
+    mascot.addEventListener("touchstart", start, { passive: true });
+    ["mouseup", "mouseleave", "touchend", "touchcancel"].forEach((evt) => mascot.addEventListener(evt, cancel));
+  }
+  bindHiddenSetupGesture();
 
   document.addEventListener("DOMContentLoaded", boot);
 })();
