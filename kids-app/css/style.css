@@ -23,7 +23,7 @@ h1, h2, h3, p { margin: 0; }
 .hidden { display: none !important; }
 
 /* ---------- Login screens ---------- */
-.login-shell { min-height: 100vh; min-height: 100dvh; display: flex; flex-direction: column; align-items: center; justify-content: flex-start; padding: 24px; padding-top: calc(48px + env(safe-area-inset-top)); padding-bottom: calc(48px + env(safe-area-inset-bottom)); text-align: center; overflow-y: auto; -webkit-overflow-scrolling: touch; }
+.login-shell { height: 100vh; height: 100dvh; display: flex; flex-direction: column; align-items: center; justify-content: flex-start; padding: 24px; padding-top: calc(48px + env(safe-area-inset-top)); padding-bottom: calc(48px + env(safe-area-inset-bottom)); text-align: center; overflow-y: auto; -webkit-overflow-scrolling: touch; box-sizing: border-box; }
 .login-shell .mascot { font-size: 64px; margin-bottom: 8px; animation: bob 2.4s ease-in-out infinite; }
 @keyframes bob { 0%, 100% { transform: translateY(0) rotate(-2deg); } 50% { transform: translateY(-10px) rotate(2deg); } }
 .login-shell h1 { font-size: 26px; font-weight: 800; margin-bottom: 6px; }
