@@ -50,7 +50,7 @@ h1, h2, h3, p { margin: 0; }
 .back-link { margin-top: 18px; font-size: 13px; color: var(--ink-soft); font-weight: 700; }
 
 /* device setup (one-time) */
-.setup-card { background: var(--surface); border-radius: var(--radius-xl); padding: 30px; max-width: 420px; width: 100%; box-shadow: var(--shadow); text-align: left; }
+.setup-card { background: var(--surface); border-radius: var(--radius-xl); padding: 30px; max-width: 420px; width: 100%; box-shadow: var(--shadow); text-align: left; max-height: none; overflow: visible; margin: 0 auto; }
 .setup-card h1 { font-size: 20px; }
 .field { margin-bottom: 14px; }
 .field label { font-size: 12px; font-weight: 700; color: var(--ink-soft); display: block; margin-bottom: 6px; }
