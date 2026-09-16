@@ -1,4 +1,4 @@
-const CACHE_NAME = "family-hub-parent-v1";
+const CACHE_NAME = "family-hub-parent-v2";
 const SHELL_FILES = [
   "./",
   "./index.html",
