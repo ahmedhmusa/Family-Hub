@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>My Family Hub</title>
+<link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+
+<!-- One-time device setup: connect to Supabase + register the two kid tiles -->
+<div id="setup-screen" class="login-shell hidden">
+  <div class="setup-card">
+    <h1>📱 Set up this tablet</h1>
+    <p>A parent should do this part once. It connects this device to your family's account.</p>
+    <div id="setup-error"></div>
+    <div class="field"><label>Supabase Project URL</label><input id="su-url" placeholder="https://xxxx.supabase.co" /></div>
+    <div class="field"><label>Supabase anon key</label><input id="su-key" placeholder="eyJhbGciOi..." /></div>
+    <hr style="border:none;border-top:1px solid #F1ECFF;margin:16px 0;" />
+    <div class="field"><label>Child 1 name</label><input id="su-c1-name" value="Adhaa" /></div>
+    <div class="field"><label>Child 1 login email</label><input id="su-c1-email" placeholder="adhaa@yourfamily.com" /></div>
+    <div class="field"><label>Child 1 emoji</label><input id="su-c1-emoji" value="👧" /></div>
+    <hr style="border:none;border-top:1px solid #F1ECFF;margin:16px 0;" />
+    <div class="field"><label>Child 2 name</label><input id="su-c2-name" value="Aleef" /></div>
+    <div class="field"><label>Child 2 login email</label><input id="su-c2-email" placeholder="aleef@yourfamily.com" /></div>
+    <div class="field"><label>Child 2 emoji</label><input id="su-c2-emoji" value="👦" /></div>
+    <button class="btn btn-primary btn-block" id="setup-save-btn" style="margin-top:6px;">Save &amp; continue</button>
+  </div>
+</div>
+
+<!-- Avatar picker -->
+<div id="picker-screen" class="login-shell hidden">
+  <div class="mascot">🌟</div>
+  <h1>Who's ready for today?</h1>
+  <p>Tap your name to get started</p>
+  <div class="avatar-picker" id="avatar-picker"></div>
+  <div class="back-link" id="open-setup-link">⚙️ Device setup</div>
+</div>
+
+<!-- PIN entry -->
+<div id="pin-screen" class="login-shell hidden">
+  <div class="mascot" id="pin-emoji">🧒</div>
+  <h1 id="pin-title">Hi!</h1>
+  <p>Enter your secret PIN</p>
+  <div class="pin-pad-wrap">
+    <div class="pin-dots" id="pin-dots">
+      <span class="pin-dot"></span><span class="pin-dot"></span><span class="pin-dot"></span><span class="pin-dot"></span><span class="pin-dot"></span><span class="pin-dot"></span>
+    </div>
+    <div class="pin-error" id="pin-error">&nbsp;</div>
+    <div class="pin-pad">
+      <button class="pin-key" data-pin="1">1</button><button class="pin-key" data-pin="2">2</button><button class="pin-key" data-pin="3">3</button>
+      <button class="pin-key" data-pin="4">4</button><button class="pin-key" data-pin="5">5</button><button class="pin-key" data-pin="6">6</button>
+      <button class="pin-key" data-pin="7">7</button><button class="pin-key" data-pin="8">8</button><button class="pin-key" data-pin="9">9</button>
+      <button class="pin-key pin-key-ghost" id="pin-back-to-picker">Back</button><button class="pin-key" data-pin="0">0</button><button class="pin-key pin-key-ghost" id="pin-backspace">⌫</button>
+    </div>
+  </div>
+</div>
+
+<!-- Main app -->
+<div id="app-shell" class="hidden">
+  <div class="topbar">
+    <div class="who"><span class="avatar" id="topbar-avatar">🧒</span><span class="name" id="topbar-name">—</span></div>
+    <div style="display:flex;align-items:center;gap:10px;">
+      <div class="points-chip">⭐ <span id="topbar-points">0</span></div>
+      <button class="switch-btn" id="switch-user-btn">Switch user</button>
+    </div>
+  </div>
+  <main class="main">
+    <section id="view-home" class="view active"></section>
+    <section id="view-tasks" class="view"></section>
+    <section id="view-routine" class="view"></section>
+    <section id="view-rewards" class="view"></section>
+  </main>
+  <nav class="bottom-nav">
+    <button class="active" data-view="home"><span class="icon">🏠</span>Home</button>
+    <button data-view="tasks"><span class="icon">✅</span>My Tasks</button>
+    <button data-view="routine"><span class="icon">🕌</span>Routine</button>
+    <button data-view="rewards"><span class="icon">⭐</span>Rewards</button>
+  </nav>
+</div>
+
+<div id="burst"></div>
+<div id="toast"></div>
+<div class="modal-backdrop hidden" id="modal-backdrop"><div class="modal" id="modal-content"></div></div>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"></script>
+<script src="js/supabaseClient.js"></script>
+<script src="js/app.js"></script>
+</body>
+</html>

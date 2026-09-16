@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Family Hub — Parent</title>
+<link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+
+<!-- Connect-to-Supabase screen (first run only) -->
+<div id="connect-screen" class="auth-shell hidden">
+  <div class="auth-card">
+    <div class="mark">🏡</div>
+    <h1>Connect to Supabase</h1>
+    <p class="sub">Paste your Supabase project URL and anon key (Project Settings → API). This is stored only on this device.</p>
+    <div id="connect-error"></div>
+    <div class="field"><label>Project URL</label><input id="cfg-url" placeholder="https://xxxx.supabase.co" /></div>
+    <div class="field"><label>Anon public key</label><input id="cfg-key" placeholder="eyJhbGciOi..." /></div>
+    <button class="btn btn-primary btn-block" id="cfg-save-btn">Connect</button>
+  </div>
+</div>
+
+<!-- Auth screen: sign in / sign up / onboarding -->
+<div id="auth-screen" class="auth-shell hidden">
+  <div class="auth-card">
+    <div class="mark">👪</div>
+    <h1 id="auth-title">Parent sign in</h1>
+    <p class="sub" id="auth-sub">Manage your family's tasks, points and rewards.</p>
+    <div id="auth-error"></div>
+    <div id="onboarding-fields" class="hidden">
+      <div class="field"><label>Family name</label><input id="ob-family" placeholder="The Moosa Family" value="The Moosa Family" /></div>
+      <div class="field"><label>Your name</label><input id="ob-name" placeholder="Ahmed Moosa" /></div>
+      <div class="field-row">
+        <div class="field"><label>You are</label><select id="ob-subtitle"><option value="Dad">Dad</option><option value="Mom">Mom</option></select></div>
+        <div class="field"><label>Emoji</label><input id="ob-emoji" value="👨" /></div>
+      </div>
+    </div>
+    <div class="field"><label>Email</label><input id="auth-email" type="email" placeholder="ahmed@yourfamily.com" /></div>
+    <div class="field"><label>Password</label><input id="auth-password" type="password" placeholder="••••••••" /></div>
+    <button class="btn btn-primary btn-block" id="auth-submit-btn">Sign in</button>
+    <div class="auth-switch"><a id="auth-mode-toggle">New family? Set up your account</a></div>
+    <div class="auth-switch"><a id="auth-reset-config">Change Supabase connection</a></div>
+  </div>
+</div>
+
+<!-- Main app -->
+<div id="app-shell" class="hidden">
+  <nav class="sidebar">
+    <div class="brand"><div class="mark">🏡</div><span>Family Hub</span></div>
+    <button class="nav-btn active" data-view="home">🏠 Home</button>
+    <button class="nav-btn" data-view="family">👪 Family</button>
+    <button class="nav-btn" data-view="tasks">✅ Tasks<span class="badge-dot hidden" id="tasks-badge"></span></button>
+    <button class="nav-btn" data-view="routine">🕌 Routine</button>
+    <button class="nav-btn" data-view="rewards">⭐ Rewards<span class="badge-dot hidden" id="rewards-badge"></span></button>
+    <button class="nav-btn" data-view="settings">⚙️ Settings</button>
+    <div class="sidebar-spacer"></div>
+    <div class="who">Signed in as<b id="who-name">—</b></div>
+    <button class="nav-btn" id="sign-out-btn">↩ Sign out</button>
+  </nav>
+  <main class="main">
+    <section id="view-home" class="view active"></section>
+    <section id="view-family" class="view"></section>
+    <section id="view-tasks" class="view"></section>
+    <section id="view-routine" class="view"></section>
+    <section id="view-rewards" class="view"></section>
+    <section id="view-settings" class="view"></section>
+  </main>
+</div>
+
+<div id="toast"></div>
+<div class="modal-backdrop hidden" id="modal-backdrop"><div class="modal" id="modal-content"></div></div>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"></script>
+<script src="js/supabaseClient.js"></script>
+<script src="js/app.js"></script>
+</body>
+</html>
