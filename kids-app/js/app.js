@@ -466,10 +466,26 @@
   }
   bindHiddenSetupGesture();
 
+  // Register the service worker, and auto-reload once when a new version
+  // takes over. Without this, a cached old build can stick around on a
+  // device indefinitely and the user sees stale CSS/JS after an update.
   function registerServiceWorker() {
-    if ("serviceWorker" in navigator) {
-      window.addEventListener("load", () => { navigator.serviceWorker.register("sw.js").catch(() => {}); });
-    }
+    if (!("serviceWorker" in navigator)) return;
+    window.addEventListener("load", () => {
+      navigator.serviceWorker.register("sw.js").then((reg) => {
+        // Check for a newer build whenever the app is opened/refocused.
+        reg.update().catch(() => {});
+        document.addEventListener("visibilitychange", () => {
+          if (!document.hidden) reg.update().catch(() => {});
+        });
+      }).catch(() => {});
+      let reloaded = false;
+      navigator.serviceWorker.addEventListener("controllerchange", () => {
+        if (reloaded) return;
+        reloaded = true;
+        window.location.reload();
+      });
+    });
   }
   registerServiceWorker();
 
