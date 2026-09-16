@@ -57,14 +57,20 @@
     <div class="brand"><div class="mark">🏡</div><span>Family Hub</span></div>
     <button class="nav-btn active" data-view="home">🏠 Home</button>
     <button class="nav-btn" data-view="family">👪 Family</button>
-    <button class="nav-btn" data-view="tasks">✅ Tasks<span class="badge-dot hidden" id="tasks-badge"></span></button>
+    <button class="nav-btn" data-view="tasks">✅ Tasks<span class="badge-dot hidden" data-badge="tasks"></span></button>
     <button class="nav-btn" data-view="routine">🕌 Routine</button>
-    <button class="nav-btn" data-view="rewards">⭐ Rewards<span class="badge-dot hidden" id="rewards-badge"></span></button>
+    <button class="nav-btn" data-view="rewards">⭐ Rewards<span class="badge-dot hidden" data-badge="rewards"></span></button>
     <button class="nav-btn" data-view="settings">⚙️ Settings</button>
     <div class="sidebar-spacer"></div>
     <div class="who">Signed in as<b id="who-name">—</b></div>
     <button class="nav-btn" id="sign-out-btn">↩ Sign out</button>
   </nav>
+
+  <header class="mobile-topbar">
+    <div class="brand"><div class="mark">🏡</div><span>Family Hub</span></div>
+    <button class="icon-btn" id="sign-out-btn-mobile" aria-label="Sign out">↩</button>
+  </header>
+
   <main class="main">
     <section id="view-home" class="view active"></section>
     <section id="view-family" class="view"></section>
@@ -73,6 +79,15 @@
     <section id="view-rewards" class="view"></section>
     <section id="view-settings" class="view"></section>
   </main>
+
+  <nav class="bottom-nav">
+    <button class="nav-btn active" data-view="home"><span class="icon">🏠</span>Home</button>
+    <button class="nav-btn" data-view="family"><span class="icon">👪</span>Family</button>
+    <button class="nav-btn" data-view="tasks"><span class="icon">✅</span>Tasks<span class="badge-dot hidden" data-badge="tasks"></span></button>
+    <button class="nav-btn" data-view="routine"><span class="icon">🕌</span>Routine</button>
+    <button class="nav-btn" data-view="rewards"><span class="icon">⭐</span>Rewards<span class="badge-dot hidden" data-badge="rewards"></span></button>
+    <button class="nav-btn" data-view="settings"><span class="icon">⚙️</span>Settings</button>
+  </nav>
 </div>
 
 <div id="toast"></div>
