@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Family Hub</title>
+<style>
+  :root { --navy: #1F2A44; --marigold: #F2A93B; --grape: #8C6FE0; --pink: #F16C9E; }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; height: 100%; font-family: -apple-system, "Segoe UI", Roboto, system-ui, sans-serif; }
+  body {
+    display: flex; align-items: center; justify-content: center; min-height: 100vh; padding: 24px;
+    background: radial-gradient(circle at 20% 0%, #FFE7B8 0%, #FFF6E9 45%, #EAF4FF 100%); color: #232B3A;
+  }
+  .wrap { max-width: 560px; text-align: center; }
+  .mark { font-size: 56px; margin-bottom: 8px; }
+  h1 { font-size: 26px; font-weight: 800; margin: 0 0 8px; }
+  p { color: #5B6270; font-size: 14px; margin: 0 0 28px; line-height: 1.5; }
+  .cards { display: flex; gap: 16px; flex-wrap: wrap; justify-content: center; }
+  a.card {
+    flex: 1; min-width: 200px; text-decoration: none; color: #fff; border-radius: 20px; padding: 26px 20px;
+    font-weight: 800; font-size: 16px; box-shadow: 0 10px 26px rgba(0,0,0,0.15); display: block;
+  }
+  a.card .emoji { font-size: 34px; display: block; margin-bottom: 10px; }
+  a.card.parent { background: linear-gradient(135deg, var(--navy), #2C3958); }
+  a.card.kids { background: linear-gradient(135deg, var(--grape), var(--pink)); }
+  a.card .sub { display: block; font-size: 12px; font-weight: 600; opacity: 0.85; margin-top: 6px; }
+</style>
+</head>
+<body>
+  <div class="wrap">
+    <div class="mark">🏡</div>
+    <h1>Family Hub</h1>
+    <p>Choose which app to open. Parents manage everything from the Parent App; kids use the Kids App on their own device.</p>
+    <div class="cards">
+      <a class="card parent" href="parent-app/">
+        <span class="emoji">👪</span>Parent App<span class="sub">Manage tasks, points &amp; approvals</span>
+      </a>
+      <a class="card kids" href="kids-app/">
+        <span class="emoji">🌟</span>Kids App<span class="sub">Tasks, prayers &amp; rewards</span>
+      </a>
+    </div>
+  </div>
+</body>
+</html>
