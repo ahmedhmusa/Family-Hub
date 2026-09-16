@@ -175,9 +175,8 @@
   function updateBadges() {
     const pendingTasks = state.tasks.filter((t) => t.needs_approval && t.approval_status === "pending").length;
     const pendingRewards = state.redemptions.filter((r) => r.status === "pending").length;
-    const tb = document.getElementById("tasks-badge"), rb = document.getElementById("rewards-badge");
-    tb.textContent = pendingTasks; tb.classList.toggle("hidden", pendingTasks === 0);
-    rb.textContent = pendingRewards; rb.classList.toggle("hidden", pendingRewards === 0);
+    document.querySelectorAll('[data-badge="tasks"]').forEach((el) => { el.textContent = pendingTasks; el.classList.toggle("hidden", pendingTasks === 0); });
+    document.querySelectorAll('[data-badge="rewards"]').forEach((el) => { el.textContent = pendingRewards; el.classList.toggle("hidden", pendingRewards === 0); });
   }
 
   function subscribeRealtime() {
@@ -197,7 +196,7 @@
     if (navBound) return;
     navBound = true;
     document.querySelectorAll(".nav-btn[data-view]").forEach((b) => b.addEventListener("click", () => renderView(b.dataset.view)));
-    document.getElementById("sign-out-btn").addEventListener("click", async () => { await sb.auth.signOut(); });
+    document.querySelectorAll("#sign-out-btn, #sign-out-btn-mobile").forEach((b) => b.addEventListener("click", async () => { await sb.auth.signOut(); }));
     // Delegated, bound once: Home, Tasks-Today and Rewards can all show
     // the SAME pending task/redemption id at once, so per-render global
     // querySelectorAll+addEventListener would stack duplicate listeners
